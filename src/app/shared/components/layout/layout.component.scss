@@ -1,0 +1,268 @@
+.layout-container {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: row-reverse;
+}
+
+// Collapsible Sidebar
+.sidebar {
+  width: 250px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  direction: ltr;
+  text-align: left;
+  transition: width 0.3s ease;
+  position: relative;
+
+  &.collapsed {
+    width: 60px;
+
+    .logo-section {
+      padding: 0 0.5rem 1rem;
+    }
+
+    .nav-item,
+    .logout-btn {
+      justify-content: center;
+      padding: 1rem 0.5rem;
+    }
+
+    .profile-info {
+      justify-content: center;
+      padding: 0.5rem;
+    }
+  }
+
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 1rem 0;
+    overflow: hidden;
+  }
+
+
+  .logo-section {
+    padding: 2rem 2rem 1.5rem;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00d4ff 0%, #00b8d4 100%);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      mat-icon {
+        color: white;
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .app-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #2c3e50;
+      margin: 0;
+      text-align: left;
+      white-space: nowrap;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+  }
+
+  &.collapsed .logo-section .app-name {
+    opacity: 0;
+    width: 0;
+  }
+
+  .nav-menu {
+    flex: 1;
+    padding: 0 1rem;
+
+    .nav-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: #546e7a;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        color: #00d4ff;
+        flex-shrink: 0;
+      }
+
+      span {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+      }
+
+      &:hover {
+        background: #f5f5f5;
+        color: #2c3e50;
+      }
+
+      &:active {
+        background: #e0e0e0;
+      }
+    }
+  }
+
+  &.collapsed .nav-item span {
+    opacity: 0;
+    width: 0;
+  }
+
+  .profile-section {
+    padding: 0.5rem;
+    border-top: 1px solid #e0e0e0;
+
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.25rem;
+      transition: all 0.3s ease;
+
+      .profile-avatar {
+        flex-shrink: 0;
+
+        mat-icon {
+          font-size: 24px;
+          width: 24px;
+          height: 24px;
+          color: #00d4ff;
+        }
+      }
+
+      .profile-details {
+        flex: 1;
+        min-width: 0;
+        opacity: 1;
+        transition: opacity 0.2s ease;
+
+        .profile-name {
+          font-size: 11px;
+          font-weight: 600;
+          color: #2c3e50;
+          margin-bottom: 0.1rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .profile-email {
+          font-size: 9px;
+          color: #7f8c8d;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  &.collapsed .profile-details {
+    opacity: 0;
+    width: 0;
+  }
+
+  .logout-section {
+    padding: 1rem;
+    border-top: 1px solid #e0e0e0;
+
+    .logout-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: #e74c3c;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+
+      mat-icon {
+        font-size: 24px;
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+      }
+
+      span {
+        opacity: 1;
+        transition: opacity 0.2s ease;
+      }
+
+      &:hover {
+        background: #ffebee;
+      }
+    }
+  }
+
+  &.collapsed .logout-btn span {
+    opacity: 0;
+    width: 0;
+  }
+}
+
+// Main Content Area
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: #3d5a80;
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+
+    &.collapsed {
+      width: 100%;
+    }
+  }
+}

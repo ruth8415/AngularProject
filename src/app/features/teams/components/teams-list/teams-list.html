@@ -1,0 +1,52 @@
+<div class="teams-container">
+  <div class="header">
+    <button mat-raised-button color="primary" (click)="openTeamDialog()">
+      <mat-icon>add</mat-icon>
+      Create New Team
+    </button>
+    <h1>My Teams</h1>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    <div class="teams-grid">
+      @for (team of teams(); track team.id) {
+        <mat-card class="team-card" (click)="viewProjects(team.id)">
+          <mat-card-header>
+            <div class="header-content">
+              <div class="member-badge" (click)="viewTeamMembers(team, $event)">
+                <mat-icon>people</mat-icon>
+                <span>{{ team.memberCount || 0 }}</span>
+              </div>
+              <mat-card-title>{{ team.name }}</mat-card-title>
+            </div>
+          </mat-card-header>
+          
+          <mat-card-content>
+            <p class="team-description">{{ team.description || 'No description provided' }}</p>
+          </mat-card-content>
+          
+          <mat-card-actions align="end">
+            <button mat-button color="primary">
+              <mat-icon>folder</mat-icon>
+              View Projects
+            </button>
+            <button mat-button color="accent" (click)="openAddMemberDialog(team, $event)">
+              <mat-icon>person_add</mat-icon>
+              Add Member
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      } @empty {
+        <div class="no-teams">
+          <mat-icon>groups</mat-icon>
+          <h2>עדיין אין צוותים</h2>
+          <p>התחל על ידי יצירת הצוות הראשון שלך</p>
+        </div>
+      }
+    </div>
+  }
+</div>

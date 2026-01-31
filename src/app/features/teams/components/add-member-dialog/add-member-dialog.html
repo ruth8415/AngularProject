@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Add Member to Team</h2>
+
+<mat-dialog-content>
+  <form [formGroup]="memberForm">
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Select User</mat-label>
+      <mat-select formControlName="userId" placeholder="Select user from list">
+        @for (user of users(); track user.id) {
+          <mat-option [value]="user.id">
+            {{ user.name }} ({{ user.email }})
+          </mat-option>
+        }
+      </mat-select>
+      @if (memberForm.controls.userId.hasError('required')) {
+        <mat-error>User selection is required</mat-error>
+      }
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary" 
+          (click)="onSubmit()" 
+          [disabled]="loading() || memberForm.invalid">
+    {{ loading() ? 'Adding...' : 'Add Member' }}
+  </button>
+</mat-dialog-actions>

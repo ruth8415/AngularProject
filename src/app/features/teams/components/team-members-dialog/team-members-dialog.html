@@ -1,0 +1,37 @@
+<h2 mat-dialog-title>
+  <mat-icon>people</mat-icon>
+  <span>{{ data.teamName }}</span>
+  <span class="member-count-badge">{{ members().length }} members</span>
+  <button mat-icon-button class="close-button" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+
+<mat-dialog-content>
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="32"></mat-spinner>
+    </div>
+  } @else {
+    @if (members().length > 0) {
+      <div class="members-list">
+        @for (member of members(); track member.id) {
+          <div class="member-item">
+            <div class="member-avatar">
+              <mat-icon>person</mat-icon>
+            </div>
+            <div class="member-info">
+              <div class="member-name">{{ member.name }}</div>
+              <div class="member-email">{{ member.email }}</div>
+            </div>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="no-members">
+        <mat-icon>person_off</mat-icon>
+        <p>No members yet</p>
+      </div>
+    }
+  }
+</mat-dialog-content>

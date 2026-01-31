@@ -1,0 +1,214 @@
+@use '@angular/material' as mat;
+
+$my-primary: mat.m2-define-palette(mat.$m2-blue-palette, 800);
+$my-accent: mat.m2-define-palette(mat.$m2-cyan-palette, 400);
+$my-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$my-theme: mat.m2-define-dark-theme((
+  color: (
+    primary: $my-primary,
+    accent: $my-accent,
+    warn: $my-warn,
+  ),
+  typography: mat.m2-define-typography-config(),
+  density: 0,
+));
+
+@include mat.core();
+@include mat.all-component-themes($my-theme);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  direction: rtl;
+}
+
+body {
+  margin: 0;
+  font-family: 'Heebo', sans-serif;
+  direction: rtl;
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+:root {
+  --primary-dark: #1e3a5f;
+  --primary-blue: #2c5282;
+  --accent-turquoise: #00d4ff;
+  --accent-cyan: #00b8d4;
+  --text-light: #e2e8f0;
+  --text-muted: #a0aec0;
+}
+
+.mat-mdc-form-field {
+  text-align: right !important;
+}
+
+.mat-mdc-select-panel {
+  direction: rtl;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%);
+  border-radius: 10px;
+  
+  &:hover {
+    background: linear-gradient(135deg, #00b8d4 0%, #0097a7 100%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+::ng-deep {
+  .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    background: rgba(0, 0, 0, 0.75) !important;
+    backdrop-filter: blur(8px);
+  }
+  
+  .mat-mdc-dialog-container {
+    border-radius: 12px !important;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3) !important;
+    
+    .mat-mdc-dialog-surface {
+      border-radius: 12px !important;
+      overflow: hidden;
+    }
+  }
+  
+  .mat-mdc-select-panel {
+    background: white !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    
+    .mat-mdc-option {
+      background: white !important;
+      color: #333 !important;
+      padding: 12px 16px !important;
+      
+      &:hover {
+        background: #f8f9fa !important;
+      }
+      
+      &.mat-mdc-option-active {
+        background: #e8f4fd !important;
+      }
+      
+      &.mdc-list-item--selected {
+        background: rgba(0, 212, 255, 0.08) !important;
+        color: var(--accent-turquoise) !important;
+        font-weight: 600;
+        
+        &:not(:hover) {
+          background: rgba(0, 212, 255, 0.08) !important;
+        }
+      }
+    }
+  }
+  
+  [mat-dialog-title] {
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding: 24px 24px 16px !important;
+  }
+  
+  .mat-mdc-dialog-content {
+    padding: 24px !important;
+  }
+  
+  .mat-mdc-dialog-actions {
+    padding: 16px 24px 24px !important;
+    
+    button[mat-raised-button] {
+      border-radius: 10px;
+      padding: 0 24px;
+      height: 44px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%);
+      transition: all 0.3s ease;
+      
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
+      }
+    }
+    
+    button[mat-button] {
+      border-radius: 10px;
+      padding: 0 24px;
+      height: 44px;
+      font-weight: 600;
+      color: #666;
+      
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+  
+  .confirm-dialog-container {
+    .mat-mdc-dialog-container {
+      .mat-mdc-dialog-surface {
+        direction: rtl !important;
+        text-align: right !important;
+      }
+    }
+    
+    .mat-mdc-dialog-content {
+      direction: rtl !important;
+      text-align: right !important;
+    }
+    
+    .mat-mdc-dialog-actions {
+      direction: rtl !important;
+      justify-content: flex-start !important;
+      flex-direction: row-reverse !important;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<div class="task-card" (click)="openTaskDetails()">
+  <div class="task-header">
+    <div class="task-title">{{ task().title }}</div>
+    <div class="task-actions" (click)="$event.stopPropagation()">
+      <button mat-icon-button (click)="editTask($event)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="deleteTask($event)" color="warn">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  
+  <div class="task-meta">
+    @if (task().projectName) {
+      <span class="meta-item">
+        <mat-icon>folder</mat-icon>
+        {{ task().projectName }}
+      </span>
+    }
+    @if (task().teamName) {
+      <span class="meta-item">
+        <mat-icon>groups</mat-icon>
+        {{ task().teamName }}
+      </span>
+    }
+    @if (task().createdAt) {
+      <span class="meta-item">
+        <mat-icon>schedule</mat-icon>
+        {{ formatDate(task().createdAt) }}
+      </span>
+    }
+  </div>
+  
+  <div class="task-badges">
+    <span class="priority-badge" [class]="'priority-' + task().priority">
+      {{ getPriorityLabel(task().priority) }}
+    </span>
+  </div>
+</div>

@@ -1,0 +1,188 @@
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.half-width {
+  flex: 1;
+}
+
+mat-dialog-title {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+  color: white !important;
+  padding: 24px !important;
+  margin: 0 !important;
+  font-size: 24px !important;
+  font-weight: 700 !important;
+  border-bottom: none;
+}
+
+mat-dialog-content {
+  min-width: 600px;
+  max-width: 800px;
+  max-height: 70vh;
+  padding: 0 !important;
+  overflow-y: auto;
+  background: white;
+  
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border-radius: 5px;
+    border: 2px solid #f1f1f1;
+    
+    &:hover {
+      background: #a0a0a0;
+    }
+  }
+
+  ::ng-deep {
+    .mat-mdc-tab-body-content {
+      overflow: visible !important;
+    }
+
+    .mat-mdc-tab-header {
+      margin-bottom: 0;
+      background: white;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .mat-mdc-tab-labels {
+      padding: 0 24px;
+    }
+    
+    .mdc-tab {
+      height: 56px;
+    }
+    
+    .mdc-tab__text-label {
+      color: #666;
+      transition: color 0.3s ease;
+    }
+    
+    .mdc-tab--active .mdc-tab__text-label {
+      color: var(--accent-turquoise);
+    }
+    
+    .mat-mdc-tab-header-pagination-chevron {
+      border-color: var(--accent-turquoise);
+    }
+    
+    .mdc-tab-indicator__content--underline {
+      border-color: var(--accent-turquoise);
+      border-width: 3px;
+    }
+  }
+}
+
+.tab-content {
+  padding: 24px;
+  min-height: 300px;
+  background: white;
+  
+  ::ng-deep {
+    .mat-mdc-form-field {
+      .mat-mdc-text-field-wrapper {
+        background: white;
+      }
+      
+      .mat-mdc-form-field-focus-overlay {
+        background-color: transparent;
+      }
+      
+      input,
+      textarea {
+        color: #333 !important;
+        caret-color: var(--accent-turquoise);
+      }
+      
+      .mat-mdc-input-element::placeholder {
+        color: #999 !important;
+      }
+      
+      label {
+        color: #666 !important;
+      }
+      
+      .mdc-notched-outline__leading,
+      .mdc-notched-outline__notch,
+      .mdc-notched-outline__trailing {
+        border-color: #d0d0d0 !important;
+      }
+      
+      &.mat-focused {
+        .mdc-notched-outline__leading,
+        .mdc-notched-outline__notch,
+        .mdc-notched-outline__trailing {
+          border-color: var(--accent-turquoise) !important;
+        }
+        
+        label {
+          color: var(--accent-turquoise) !important;
+        }
+      }
+    }
+    
+    .mat-mdc-select {
+      .mat-mdc-select-value {
+        color: #333 !important;
+      }
+      
+      .mat-mdc-select-placeholder {
+        color: #999 !important;
+      }
+    }
+  }
+}
+
+mat-dialog-actions {
+  padding: 20px 24px !important;
+  background: white;
+  border-top: 1px solid #e8e8e8;
+  
+  button[mat-raised-button] {
+    background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%);
+    color: white;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0 32px;
+    height: 44px;
+    font-size: 15px;
+    
+    &:hover:not(:disabled) {
+      box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3);
+      transform: translateY(-1px);
+    }
+    
+    &:disabled {
+      opacity: 0.5;
+    }
+  }
+  
+  button[mat-button] {
+    color: #666;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 0 24px;
+    height: 44px;
+    font-size: 15px;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+  }
+}

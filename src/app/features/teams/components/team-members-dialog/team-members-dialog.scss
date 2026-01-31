@@ -1,0 +1,166 @@
+:host ::ng-deep {
+  .mat-mdc-dialog-container {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  }
+  
+  .mat-mdc-dialog-surface {
+    background-color: white !important;
+  }
+}
+
+h2[mat-dialog-title] {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+  color: white !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  padding: 16px 20px !important;
+  margin: 0 !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  mat-icon {
+    color: white;
+    font-size: 22px;
+    width: 22px;
+    height: 22px;
+  }
+
+  span {
+    flex: 1;
+  }
+
+  .member-count-badge {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    flex: none;
+  }
+
+  .close-button {
+    color: white !important;
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.15) !important;
+    }
+  }
+}
+
+mat-dialog-content {
+  min-width: 400px;
+  max-height: 400px;
+  padding: 16px !important;
+  background-color: white;
+  color: #333;
+  overflow-y: auto;
+}
+
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.no-members {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  gap: 8px;
+
+  mat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    color: #ddd;
+  }
+
+  p {
+    color: #999;
+    font-size: 13px;
+    margin: 0;
+  }
+}
+
+.members-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  .member-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: #e9ecef;
+      transform: translateX(4px);
+    }
+
+    .member-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+
+      mat-icon {
+        color: white;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    .member-info {
+      flex: 1;
+      min-width: 0;
+
+      .member-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .member-email {
+        font-size: 12px;
+        color: #666;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+:host ::ng-deep .mat-mdc-dialog-container {
+  .mdc-dialog__surface {
+    border-radius: 12px !important;
+  }
+}

@@ -1,0 +1,102 @@
+<div class="auth-container">
+  <div class="auth-left">
+    <div class="brand-content">
+      <div class="brand-icon">
+        <mat-icon>task_alt</mat-icon>
+      </div>
+      <h1>Master Your <span class="highlight">Workflow.</span></h1>
+      <p class="tagline">The ultimate task management solution for teams who value speed, clarity, and results.</p>
+      
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">
+            <mat-icon>groups</mat-icon>
+          </div>
+          <div class="feature-content">
+            <h3>Real-time Collaboration</h3>
+            <p>Manage teams and projects in one synchronized workspace.</p>
+          </div>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">
+            <mat-icon>trending_up</mat-icon>
+          </div>
+          <div class="feature-content">
+            <h3>Smart Tracking</h3>
+            <p>Get insights into your productivity and hit every deadline.</p>
+          </div>
+        </div>
+        
+        <div class="feature">
+          <div class="feature-icon">
+            <mat-icon>security</mat-icon>
+          </div>
+          <div class="feature-content">
+            <h3>Enterprise Security</h3>
+            <p>Your data is protected with industry-grade encryption.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="auth-right">
+    <div class="auth-card">
+      <div class="auth-header">
+        <h2>Join Us</h2>
+        <p>Create a new account to get started</p>
+      </div>
+      
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+        <div class="form-group">
+          <label>Full Name</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="text" formControlName="name" placeholder="Full Name">
+            @if (registerForm.controls.name.hasError('required')) {
+              <mat-error>Name is required</mat-error>
+            }
+            @if (registerForm.controls.name.hasError('minlength')) {
+              <mat-error>Name must be at least 2 characters</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="email" formControlName="email" placeholder="your@email.com">
+            @if (registerForm.controls.email.hasError('required')) {
+              <mat-error>Email is required</mat-error>
+            }
+            @if (registerForm.controls.email.hasError('email')) {
+              <mat-error>Please enter a valid email</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <mat-form-field appearance="outline" class="full-width">
+            <input matInput type="password" formControlName="password" placeholder="Password">
+            @if (registerForm.controls.password.hasError('required')) {
+              <mat-error>Password is required</mat-error>
+            }
+            @if (registerForm.controls.password.hasError('minlength')) {
+              <mat-error>Password must be at least 6 characters</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" 
+                class="submit-btn" [disabled]="loading() || registerForm.invalid">
+          {{ loading() ? 'Registering...' : 'Register' }}
+        </button>
+      </form>
+      
+      <div class="auth-footer">
+        <p>Already have an account? <a routerLink="/login" class="link">Login here</a></p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<h2 mat-dialog-title>{{ isEditMode() ? 'ערוך משימה' : 'צור משימה חדשה' }}</h2>
+
+<mat-dialog-content>
+  <mat-tab-group>
+    <mat-tab label="פרטי משימה">
+      <div class="tab-content">
+        <form [formGroup]="taskForm">
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>כותרת המשימה</mat-label>
+            <input matInput formControlName="title" placeholder="לדוגמה: עיצוב מסך התחברות">
+            @if (taskForm.controls.title.hasError('required')) {
+              <mat-error>כותרת היא שדה חובה</mat-error>
+            }
+            @if (taskForm.controls.title.hasError('minlength')) {
+              <mat-error>הכותרת חייבת להכיל לפחות 3 תווים</mat-error>
+            }
+          </mat-form-field>
+
+          @if (!data.projectId) {
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>צוות</mat-label>
+              <mat-select formControlName="teamId" placeholder="בחר צוות" (selectionChange)="onTeamChange()">
+                @for (team of teams(); track team.id) {
+                  <mat-option [value]="team.id">{{ team.name }}</mat-option>
+                }
+              </mat-select>
+              @if (taskForm.controls.teamId?.hasError('required')) {
+                <mat-error>בחירת צוות היא שדה חובה</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>פרויקט</mat-label>
+              <mat-select formControlName="projectId" placeholder="בחר פרויקט" [disabled]="!taskForm.value.teamId">
+                @for (project of filteredProjects(); track project.id) {
+                  <mat-option [value]="project.id">{{ project.name }}</mat-option>
+                }
+              </mat-select>
+              @if (taskForm.controls.projectId?.hasError('required')) {
+                <mat-error>בחירת פרויקט היא שדה חובה</mat-error>
+              }
+            </mat-form-field>
+          }
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>תיאור (אופציונלי)</mat-label>
+            <textarea matInput formControlName="description" rows="4" 
+                      placeholder="תאר את המשימה בפירוט..."></textarea>
+          </mat-form-field>
+
+          <div class="form-row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>סטטוס</mat-label>
+              <mat-select formControlName="status">
+                @for (status of statusOptions; track status.value) {
+                  <mat-option [value]="status.value">{{ status.label }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>עדיפות</mat-label>
+              <mat-select formControlName="priority">
+                @for (priority of priorityOptions; track priority.value) {
+                  <mat-option [value]="priority.value">{{ priority.label }}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </form>
+      </div>
+    </mat-tab>
+
+    @if (isEditMode() && data.task) {
+      <mat-tab label="תגובות">
+        <div class="tab-content">
+          <app-comments-section [taskId]="data.task.id" />
+        </div>
+      </mat-tab>
+    }
+  </mat-tab-group>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">ביטול</button>
+  <button mat-raised-button color="primary" 
+          (click)="onSubmit()" 
+          [disabled]="loading() || taskForm.invalid">
+    {{ loading() ? 'שומר...' : isEditMode() ? 'עדכן משימה' : 'צור משימה' }}
+  </button>
+</mat-dialog-actions>

@@ -1,0 +1,203 @@
+.teams-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  min-height: calc(100vh - 70px);
+  background: #3d5a80;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.5s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  
+  h1 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    text-align: left;
+  }
+  
+  button {
+    height: 50px;
+    padding: 0 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 212, 255, 0.4);
+    }
+    
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px;
+}
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.team-card {
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 24px rgba(0, 212, 255, 0.25);
+    border-color: #00d4ff;
+  }
+  
+  mat-card-header {
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+    padding: 24px;
+    color: white;
+    
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100%;
+      gap: 12px;
+    }
+    
+    mat-card-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      margin: 0;
+      flex: 1;
+      text-align: left;
+    }
+    
+    mat-card-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+  
+  mat-card-content {
+    padding: 24px;
+    min-height: 80px;
+    
+    .team-description {
+      color: #666;
+      font-size: 15px;
+      line-height: 1.6;
+      direction: ltr;
+      text-align: left;
+      margin: 0;
+    }
+  }
+  
+  mat-card-actions {
+    padding: 16px 24px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    
+    button {
+      color: var(--accent-turquoise);
+      font-weight: 600;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 8px;
+      padding: 8px 16px;
+      
+      &:hover {
+        background-color: rgba(0, 212, 255, 0.15);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 212, 255, 0.2);
+      }
+      
+      mat-icon {
+        margin-right: 6px;
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.no-teams {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 100px 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  
+  mat-icon {
+    font-size: 80px;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px;
+  }
+  
+  h2 {
+    margin: 16px 0 12px;
+    font-size: 28px;
+    color: #333;
+    font-weight: 700;
+  }
+  
+  p {
+    color: #666;
+    font-size: 16px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

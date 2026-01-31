@@ -1,0 +1,70 @@
+<div class="layout-container">
+  <!-- Collapsible Sidebar -->
+  <aside class="sidebar" [class.collapsed]="sidebarCollapsed()">
+    <div class="sidebar-content">
+      <!-- Logo and App Name -->
+      <div class="logo-section" (click)="navigateToDashboard()">
+        <div class="logo-icon">
+          <mat-icon>check_circle</mat-icon>
+        </div>
+        @if (!sidebarCollapsed()) {
+          <h1 class="app-name">TaskFlow</h1>
+        }
+      </div>
+
+      <!-- Navigation Menu -->
+      <nav class="nav-menu">
+        <button class="nav-item" (click)="navigateToTeams()" [title]="'My Teams'">
+          <mat-icon>groups</mat-icon>
+          @if (!sidebarCollapsed()) {
+            <span>My Teams</span>
+          }
+        </button>
+        
+        <button class="nav-item" (click)="navigateToProjects()" [title]="'My Projects'">
+          <mat-icon>folder</mat-icon>
+          @if (!sidebarCollapsed()) {
+            <span>My Projects</span>
+          }
+        </button>
+        
+        <button class="nav-item" (click)="navigateToTasks()" [title]="'My Tasks'">
+          <mat-icon>task_alt</mat-icon>
+          @if (!sidebarCollapsed()) {
+            <span>My Tasks</span>
+          }
+        </button>
+      </nav>
+
+      <!-- User Profile Section -->
+      <div class="profile-section">
+        <div class="profile-info">
+          <div class="profile-avatar">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          @if (!sidebarCollapsed()) {
+            <div class="profile-details">
+              <div class="profile-name">{{ currentUser()?.name }}</div>
+              <div class="profile-email">{{ currentUser()?.email }}</div>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Logout Button at Bottom -->
+      <div class="logout-section">
+        <button class="logout-btn" (click)="logout()" [title]="'Logout'">
+          <mat-icon>logout</mat-icon>
+          @if (!sidebarCollapsed()) {
+            <span>Logout</span>
+          }
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content Area with Router Outlet -->
+  <main class="main-content">
+    <router-outlet />
+  </main>
+</div>

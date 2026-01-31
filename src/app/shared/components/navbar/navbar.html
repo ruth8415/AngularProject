@@ -1,0 +1,27 @@
+@if (isAuthenticated()) {
+  <mat-toolbar color="primary">
+    <span class="logo" routerLink="/dashboard">
+      <mat-icon class="logo-icon">check_circle</mat-icon>
+      <span class="logo-text">TaskFlow</span>
+    </span>
+    
+    <span class="spacer"></span>
+    
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+      {{ currentUser()?.name }}
+    </button>
+    
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item disabled>
+        <mat-icon>email</mat-icon>
+        <span>{{ currentUser()?.email }}</span>
+      </button>
+      <mat-divider></mat-divider>
+      <button mat-menu-item (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>התנתק</span>
+      </button>
+    </mat-menu>
+  </mat-toolbar>
+}

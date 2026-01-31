@@ -1,0 +1,205 @@
+<!-- Dashboard Content -->
+<div class="dashboard-content">
+  @if (loading()) {
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading dashboard...</p>
+    </div>
+  } @else if (stats()) {
+    <div class="dashboard-wrapper">
+      <!-- Hero Header with Animated Background -->
+      <div class="hero-header">
+        <div class="hero-bg">
+          <div class="gradient-orb orb-1"></div>
+          <div class="gradient-orb orb-2"></div>
+          <div class="gradient-orb orb-3"></div>
+        </div>
+        <div class="hero-content">
+          <h1 class="hero-title">
+            <span class="word">Dashboard</span>
+            <span class="word">Overview</span>
+          </h1>
+          <p class="hero-subtitle">Track your productivity and team performance in real-time</p>
+        </div>
+      </div>
+
+      <!-- Impressive Stats Section -->
+      <div class="impressive-stats">
+        <div class="stat-box" data-index="0">
+          <div class="stat-number">99.9%</div>
+          <div class="stat-label">UPTIME</div>
+          <div class="stat-shine"></div>
+        </div>
+        <div class="stat-box" data-index="1">
+          <div class="stat-number">200k+</div>
+          <div class="stat-label">TASKS COMPLETED</div>
+          <div class="stat-shine"></div>
+        </div>
+        <div class="stat-box" data-index="2">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">COUNTRIES</div>
+          <div class="stat-shine"></div>
+        </div>
+      </div>
+
+      <!-- Features Showcase with Animated Mockup -->
+      <div class="features-showcase">
+        <div class="showcase-content">
+          <div class="mockup-container">
+            <div class="mockup-frame">
+              <div class="frame-header">
+                <div class="frame-dots">
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                  <span class="dot"></span>
+                </div>
+              </div>
+              <div class="frame-body">
+                <div class="task-cards">
+                  <div class="task-card card-red"></div>
+                  <div class="task-card card-blue"></div>
+                  <div class="task-card card-green"></div>
+                </div>
+                <div class="notification-popup">
+                  <mat-icon>check_circle</mat-icon>
+                  <div class="popup-text">
+                    <div class="popup-title">Project Launched</div>
+                    <div class="popup-time">Just now</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-glow"></div>
+          </div>
+          <div class="showcase-text">
+            <h2 class="showcase-title">Powerful Task Management</h2>
+            <p class="showcase-description">
+              Experience seamless collaboration with real-time updates, 
+              intelligent automation, and beautiful interfaces designed for productivity.
+            </p>
+            <div class="feature-points">
+              <div class="point">
+                <div class="point-icon">
+                  <mat-icon>bolt</mat-icon>
+                </div>
+                <span>Lightning Fast</span>
+              </div>
+              <div class="point">
+                <div class="point-icon">
+                  <mat-icon>security</mat-icon>
+                </div>
+                <span>Secure & Private</span>
+              </div>
+              <div class="point">
+                <div class="point-icon">
+                  <mat-icon>sync</mat-icon>
+                </div>
+                <span>Real-time Sync</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Section -->
+      <div class="charts-section">
+        <!-- Task Status Distribution -->
+        <div class="chart-card">
+          <h3 class="chart-title">Task Status Distribution</h3>
+          @if (taskStatusData()) {
+            <div class="chart-container">
+              <div class="progress-rings">
+                <div class="progress-ring completed">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                    <circle class="ring-progress" cx="60" cy="60" r="50" 
+                            [style.stroke-dashoffset]="314 - (314 * stats()!.completedTasks / stats()!.totalTasks)"></circle>
+                  </svg>
+                  <div class="ring-label">
+                    <div class="ring-value">{{ stats()!.completedTasks }}</div>
+                    <div class="ring-text">Completed</div>
+                  </div>
+                </div>
+                
+                <div class="progress-ring in-progress">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                    <circle class="ring-progress" cx="60" cy="60" r="50" 
+                            [style.stroke-dashoffset]="314 - (314 * stats()!.inProgressTasks / stats()!.totalTasks)"></circle>
+                  </svg>
+                  <div class="ring-label">
+                    <div class="ring-value">{{ stats()!.inProgressTasks }}</div>
+                    <div class="ring-text">In Progress</div>
+                  </div>
+                </div>
+                
+                <div class="progress-ring pending">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="ring-bg" cx="60" cy="60" r="50"></circle>
+                    <circle class="ring-progress" cx="60" cy="60" r="50" 
+                            [style.stroke-dashoffset]="314 - (314 * stats()!.pendingTasks / stats()!.totalTasks)"></circle>
+                  </svg>
+                  <div class="ring-label">
+                    <div class="ring-value">{{ stats()!.pendingTasks }}</div>
+                    <div class="ring-text">Pending</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="chart-card quick-stats">
+          <h3 class="chart-title">Quick Stats</h3>
+          <div class="quick-stats-list">
+            <div class="quick-stat-item">
+              <div>
+                <div class="quick-stat-icon completed">
+                  <mat-icon>check_circle</mat-icon>
+                </div>
+                <div class="quick-stat-info">
+                  <div class="quick-stat-value">{{ animatedCompleted() }}</div>
+                  <div class="quick-stat-label">Tasks Completed</div>
+                </div>
+              </div>
+              <div class="quick-stat-progress">
+                <div class="progress-bar completed" [style.width.%]="(stats()!.completedTasks / stats()!.totalTasks) * 100"></div>
+              </div>
+            </div>
+            
+            <div class="quick-stat-item">
+              <div>
+                <div class="quick-stat-icon pending">
+                  <mat-icon>pending</mat-icon>
+                </div>
+                <div class="quick-stat-info">
+                  <div class="quick-stat-value">{{ animatedPending() }}</div>
+                  <div class="quick-stat-label">Tasks Remaining</div>
+                </div>
+              </div>
+              <div class="quick-stat-progress">
+                <div class="progress-bar pending" [style.width.%]="(stats()!.pendingTasks / stats()!.totalTasks) * 100"></div>
+              </div>
+            </div>
+            
+            <div class="quick-stat-item">
+              <div>
+                <div class="quick-stat-icon in-progress">
+                  <mat-icon>autorenew</mat-icon>
+                </div>
+                <div class="quick-stat-info">
+                  <div class="quick-stat-value">{{ animatedInProgress() }}</div>
+                  <div class="quick-stat-label">In Progress</div>
+                </div>
+              </div>
+              <div class="quick-stat-progress">
+                <div class="progress-bar in-progress" [style.width.%]="(stats()!.inProgressTasks / stats()!.totalTasks) * 100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

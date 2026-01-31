@@ -1,0 +1,65 @@
+<mat-card class="comments-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon>comment</mat-icon>
+      תגובות ({{ comments().length }})
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="comments-content">
+      @if (loading()) {
+        <div class="loading-container">
+          <p>טוען תגובות...</p>
+        </div>
+      } @else {
+        @if (comments().length > 0) {
+          <mat-list class="comments-list">
+            @for (comment of comments(); track comment.id) {
+              <mat-list-item>
+                <div class="comment-item">
+                  <div class="comment-header">
+                    <span class="comment-author">
+                      <mat-icon>person</mat-icon>
+                      {{ comment.userName || 'משתמש' }}
+                    </span>
+                    <span class="comment-date">
+                      {{ comment.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+                    </span>
+                  </div>
+                  <div class="comment-content">
+                    {{ comment.body }}
+                  </div>
+                </div>
+              </mat-list-item>
+              <mat-divider></mat-divider>
+            }
+          </mat-list>
+        } @else {
+          <div class="no-comments">
+            <mat-icon>chat_bubble_outline</mat-icon>
+            <p>אין תגובות עדיין</p>
+          </div>
+        }
+      }
+    </div>
+
+    <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <textarea 
+          matInput 
+          formControlName="body" 
+          rows="1"
+          placeholder="הוסף תגובה..."></textarea>
+      </mat-form-field>
+
+      <button 
+        mat-icon-button
+        color="primary" 
+        type="submit" 
+        [disabled]="submitting() || commentForm.invalid">
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

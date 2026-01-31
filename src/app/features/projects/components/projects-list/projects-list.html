@@ -1,0 +1,60 @@
+<div class="projects-container">
+  <div class="header">
+    <div class="header-left">
+      <button mat-raised-button color="primary" (click)="openProjectDialog()">
+        <mat-icon>add</mat-icon>
+        Create New Project
+      </button>
+    </div>
+    <div class="header-right">
+      @if (teamId) {
+        <button mat-icon-button class="back-button" (click)="goBack()">
+          <mat-icon>arrow_back</mat-icon>
+        </button>
+      }
+      <h1>{{ teamId ? 'Projects' : 'My Projects' }}</h1>
+    </div>
+  </div>
+
+  @if (loading()) {
+    <div class="loading-spinner">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    <div class="projects-grid">
+      @for (project of projects(); track project.id) {
+        <mat-card class="project-card" (click)="viewTasks(project.id)">
+          <mat-card-header>
+            <mat-card-title>{{ project.name }}</mat-card-title>
+            @if (!teamId && project.teamName) {
+              <mat-card-subtitle>
+                <mat-icon>groups</mat-icon>
+                {{ project.teamName }}
+              </mat-card-subtitle>
+            }
+          </mat-card-header>
+          
+          <mat-card-content>
+            <p>{{ project.description || 'No description' }}</p>
+          </mat-card-content>
+          
+          <mat-card-actions align="end">
+            <button mat-button color="primary">
+              <mat-icon>task_alt</mat-icon>
+              View Tasks
+            </button>
+            <button mat-icon-button color="warn" (click)="deleteProject(project, $event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      } @empty {
+        <div class="no-projects">
+          <mat-icon>folder</mat-icon>
+          <h2>No Projects Yet</h2>
+          <p>Get started by creating the first project</p>
+        </div>
+      }
+    </div>
+  }
+</div>

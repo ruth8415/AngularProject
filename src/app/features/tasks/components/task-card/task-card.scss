@@ -1,0 +1,151 @@
+.task-card {
+  cursor: pointer;
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+  }
+  
+  .task-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0 8px 0;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+    
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #666;
+      background: #f8f9fa;
+      padding: 4px 8px;
+      border-radius: 6px;
+      
+      mat-icon {
+        font-size: 14px;
+        width: 14px;
+        height: 14px;
+        color: #999;
+      }
+    }
+  }
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.task-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+  line-height: 1.4;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+.task-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 1;
+  
+  button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      color: #666;
+    }
+    
+    &:hover {
+      background-color: rgba(0, 184, 212, 0.1);
+      
+      mat-icon {
+        color: var(--accent-turquoise);
+      }
+    }
+    
+    &[color="warn"] {
+      mat-icon {
+        color: #666;
+      }
+      
+      &:hover {
+        background-color: rgba(244, 67, 54, 0.1);
+        
+        mat-icon {
+          color: #f44336;
+        }
+      }
+    }
+  }
+}
+
+.task-badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.priority-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  
+  &.priority-high {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+  }
+  
+  &.priority-normal {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-turquoise);
+  }
+  
+  &.priority-low {
+    background: rgba(158, 158, 158, 0.1);
+    color: #9e9e9e;
+  }
+}
+
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.task-card {
+  animation: cardEnter 0.4s ease-out;
+}

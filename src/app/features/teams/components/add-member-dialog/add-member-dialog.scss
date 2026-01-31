@@ -1,0 +1,103 @@
+.full-width {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+:host ::ng-deep {
+  .mat-mdc-dialog-container {
+    background-color: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12) !important;
+  }
+  
+  .mat-mdc-dialog-surface {
+    background-color: white !important;
+  }
+  
+  .mat-mdc-form-field {
+    .mat-mdc-text-field-wrapper {
+      background-color: white !important;
+    }
+    
+    input {
+      color: #333 !important;
+      font-size: 15px !important;
+    }
+    
+    .mat-mdc-select-value {
+      color: #333 !important;
+      font-size: 15px !important;
+    }
+    
+    .mat-mdc-select-value-text {
+      color: #333 !important;
+    }
+    
+    .mat-mdc-form-field-label {
+      color: #666 !important;
+    }
+    
+    .mdc-notched-outline__leading,
+    .mdc-notched-outline__notch,
+    .mdc-notched-outline__trailing {
+      border-color: #e0e0e0 !important;
+    }
+  }
+}
+
+h2[mat-dialog-title] {
+  background-color: white;
+  color: #333 !important;
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  padding: 24px 24px 16px !important;
+  margin: 0 !important;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: right;
+}
+
+mat-dialog-content {
+  min-width: 450px;
+  padding: 24px !important;
+  background-color: white;
+  color: #333;
+}
+
+mat-dialog-actions {
+  padding: 16px 24px !important;
+  margin: 0 !important;
+  background-color: white;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 12px;
+}
+
+button[mat-button] {
+  color: #666 !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding: 0 24px !important;
+  height: 42px !important;
+  border: 1px solid #e0e0e0 !important;
+
+  &:hover {
+    background-color: #f8f9fa !important;
+    border-color: #d0d0d0 !important;
+  }
+}
+
+button[mat-raised-button] {
+  background: linear-gradient(135deg, var(--accent-turquoise) 0%, var(--accent-cyan) 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  padding: 0 32px !important;
+  height: 42px !important;
+  box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2) !important;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 212, 255, 0.3) !important;
+    transform: translateY(-1px);
+  }
+}

@@ -1,0 +1,21 @@
+@import '../login/login.scss';
+
+.auth-right {
+  flex: 0 0 35%;
+  background: white;
+  padding: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.auth-left {
+  flex: 0 0 65%;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+  padding: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}

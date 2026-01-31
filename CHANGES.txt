@@ -1,0 +1,130 @@
+===========================================
+עדכוני API ושינויים באפליקציה
+===========================================
+
+תאריך: 29 ינואר 2026
+
+===========================================
+1. הוספת חבר לצוות לפי שם משתמש
+===========================================
+
+✅ נוסף API חדש להוספת חבר לצוות לפי שם משתמש:
+   - Endpoint: POST /api/teams/:teamId/members
+   - Body: { "username": "שם_משתמש" }
+   - הקוד תומך גם ב-userId וגם ב-username
+
+✅ נוסף UI להוספת חברים לצוות:
+   - דיאלוג חדש: AddMemberDialogComponent
+   - כפתור "הוסף חבר" בכל כרטיס צוות
+   - שדה קלט לשם משתמש
+   - הודעות שגיאה והצלחה
+
+קבצים שנוצרו/עודכנו:
+   - src/app/features/teams/components/add-member-dialog/add-member-dialog.html
+   - src/app/features/teams/components/add-member-dialog/add-member-dialog.ts
+   - src/app/features/teams/components/add-member-dialog/add-member-dialog.scss
+   - src/app/core/services/teams.ts (נוסף מתודה: addMemberByUsername)
+   - src/app/features/teams/components/teams-list/teams-list.html
+   - src/app/features/teams/components/teams-list/teams-list.ts
+
+===========================================
+2. מחיקת פרויקט
+===========================================
+
+✅ נוסף API למחיקת פרויקט:
+   - Endpoint: DELETE /api/projects/:projectId
+   - מחזיר: 204 No Content בהצלחה
+
+✅ עדכון ב-ProjectsService:
+   - נוספה מתודה: deleteProject(projectId: number)
+   - מעדכן אוטומטית את רשימת הפרויקטים לאחר מחיקה
+
+קבצים שעודכנו:
+   - src/app/core/services/projects.ts
+
+===========================================
+3. קבלת פרטי משתמש לפי טוקן
+===========================================
+
+✅ נוסף API לקבלת פרטי המשתמש המחובר:
+   - Endpoint: GET /api/auth/me
+   - Headers: Authorization: Bearer <token>
+   - מחזיר: { id, email, name }
+
+✅ עדכון ב-AuthService:
+   - נוספה מתודה: getCurrentUser()
+   - מעדכן אוטומטית את ה-currentUser signal
+
+קבצים שעודכנו:
+   - src/app/core/services/auth.ts
+   - src/app/core/config/api.config.ts (נוסף endpoint: auth.me)
+
+===========================================
+4. עדכונים נוספים
+===========================================
+
+✅ תרגום עמודי התחברות והרשמה לאנגלית:
+   - כל הטקסטים באנגלית
+   - כיוון LTR במקום RTL
+   - עיצוב מעודכן: 65% כחול, 35% לבן
+
+✅ תיקוני באגים:
+   - תיקון בעיית תצוגה של select בדיאלוג פרויקט
+   - תיקון ניווט אחורה מעמוד משימות
+   - תיקון עיצוב דיאלוג אישור מחיקה
+
+קבצים שעודכנו:
+   - src/app/features/auth/components/login/login.html
+   - src/app/features/auth/components/login/login.scss
+   - src/app/features/auth/components/register/register.html
+   - src/app/features/auth/components/register/register.scss
+
+===========================================
+סיכום Endpoints זמינים
+===========================================
+
+Auth:
+   - POST /api/auth/register
+   - POST /api/auth/login
+   - GET /api/auth/me ⭐ חדש
+
+Users:
+   - GET /api/users ⭐ חדש (מחזיר כל המשתמשים עם ID + NAME + EMAIL)
+
+Teams:
+   - GET /api/teams
+   - POST /api/teams
+   - POST /api/teams/:teamId/members (תומך ב-username או userId) ⭐ מעודכן
+   - GET /api/teams/:teamId/members ⭐ חדש (מחזיר את כל חברי הצוות)
+   - DELETE /api/teams/:teamId/members/:userId ⭐ חדש (מוחק חבר מצוות)
+   - DELETE /api/teams/:teamId ⭐ חדש (מוחק צוות)
+
+Projects:
+   - GET /api/projects
+   - POST /api/projects
+   - PATCH /api/projects/:projectId ⭐ חדש (מעדכן פרויקט)
+   - DELETE /api/projects/:projectId ⭐ חדש (מוחק פרויקט)
+
+Tasks:
+   - GET /api/tasks?projectId=:id
+   - POST /api/tasks
+   - PATCH /api/tasks/:id
+   - DELETE /api/tasks/:id
+
+Comments:
+   - GET /api/comments?taskId=:id
+   - POST /api/comments
+
+Health:
+   - GET /api/health
+
+===========================================
+הערות למפתחים
+===========================================
+
+1. כל ה-API endpoints דורשים authentication מלבד register ו-login
+2. יש לשלוח את ה-token ב-header: Authorization: Bearer <token>
+3. כל השגיאות מוחזרות בפורמט: { message: "הודעת שגיאה" }
+4. כל התאריכים מוחזרים בפורמט ISO 8601
+
+===========================================
