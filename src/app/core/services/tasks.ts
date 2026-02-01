@@ -26,6 +26,7 @@ export class TasksService {
       teamName: serverTask.team_name || serverTask.teamName,
       assigneeId: serverTask.assigned_to || serverTask.assignedTo,
       createdBy: serverTask.created_by || serverTask.createdBy,
+      dueDate: serverTask.due_date || serverTask.dueDate,
       createdAt: serverTask.created_at || serverTask.createdAt,
       updatedAt: serverTask.updated_at || serverTask.updatedAt
     };

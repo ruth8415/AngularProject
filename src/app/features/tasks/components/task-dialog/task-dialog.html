@@ -49,6 +49,16 @@
                       placeholder="Describe the task in detail..."></textarea>
           </mat-form-field>
 
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Due Date</mat-label>
+            <input matInput [matDatepicker]="picker" type="date" formControlName="dueDate" required>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            @if (taskForm.controls.dueDate?.hasError('required')) {
+              <mat-error>Due date is required</mat-error>
+            }
+          </mat-form-field>
+
           <div class="form-row">
             <mat-form-field appearance="outline" class="half-width">
               <mat-label>Status</mat-label>
@@ -71,14 +81,6 @@
         </form>
       </div>
     </mat-tab>
-
-    @if (isEditMode() && data.task) {
-      <mat-tab label="Comments">
-        <div class="tab-content">
-          <app-comments-section [taskId]="data.task.id" />
-        </div>
-      </mat-tab>
-    }
   </mat-tab-group>
 </mat-dialog-content>
 
@@ -86,7 +88,7 @@
   <button mat-button (click)="onCancel()">Cancel</button>
   <button mat-raised-button color="primary" 
           (click)="onSubmit()" 
-          [disabled]="loading() || taskForm.invalid">
+          [disabled]="loading()">
     {{ loading() ? 'Saving...' : isEditMode() ? 'Update Task' : 'Create Task' }}
   </button>
 </mat-dialog-actions>

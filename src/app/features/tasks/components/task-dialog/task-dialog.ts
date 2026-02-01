@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task, TaskStatus, TaskPriority } from '../../../../core/models/task.model';
 import { CommentsSectionComponent } from '../comments-section/comments-section';
@@ -31,6 +33,8 @@ interface DialogData {
     MatSelectModule,
     MatButtonModule,
     MatTabsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     CommentsSectionComponent
   ],
   templateUrl: './task-dialog.html',
@@ -63,6 +67,7 @@ export class TaskDialogComponent implements OnInit {
     description: [''],
     status: ['todo' as TaskStatus, Validators.required],
     priority: ['normal' as TaskPriority, Validators.required],
+    dueDate: ['', Validators.required],
     teamId: [null as number | null],
     projectId: [null as number | null]
   });
@@ -86,7 +91,8 @@ export class TaskDialogComponent implements OnInit {
         title: this.data.task.title,
         description: this.data.task.description || '',
         status: this.data.task.status,
-        priority: this.data.task.priority
+        priority: this.data.task.priority,
+        dueDate: this.data.task.dueDate || ''
       });
     } else if (this.data.status) {
       this.taskForm.patchValue({ status: this.data.status });
@@ -118,33 +124,35 @@ export class TaskDialogComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.taskForm.valid) {
+    if (this.isEditMode()) {
       this.loading.set(true);
-      
-      if (this.isEditMode()) {
-        const formValue = this.taskForm.getRawValue();
-        const updateData = {
-          title: formValue.title || undefined,
-          description: formValue.description || undefined,
-          status: formValue.status || undefined,
-          priority: formValue.priority || undefined
-        };
-        this.tasksService.updateTask(this.data.task!.id, updateData).subscribe({
-          next: () => {
-            this.dialogRef.close(true);
-          },
-          error: () => {
-            this.loading.set(false);
-            this.snackBar.open('Error updating task', 'Close', { duration: 3000 });
-          }
-        });
-      } else {
+      const formValue = this.taskForm.getRawValue();
+      const updateData = {
+        title: formValue.title || undefined,
+        description: formValue.description || undefined,
+        status: formValue.status || undefined,
+        priority: formValue.priority || undefined,
+        dueDate: formValue.dueDate || undefined
+      };
+      this.tasksService.updateTask(this.data.task!.id, updateData).subscribe({
+        next: () => {
+          this.dialogRef.close(true);
+        },
+        error: () => {
+          this.loading.set(false);
+          this.snackBar.open('Error updating task', 'Close', { duration: 3000 });
+        }
+      });
+    } else {
+      if (this.taskForm.valid) {
+        this.loading.set(true);
         const formValue = this.taskForm.getRawValue();
         const taskData = {
           title: formValue.title!,
           description: formValue.description || '',
           status: formValue.status!,
           priority: formValue.priority!,
+          dueDate: formValue.dueDate!,
           projectId: formValue.projectId || this.data.projectId!
         };
         

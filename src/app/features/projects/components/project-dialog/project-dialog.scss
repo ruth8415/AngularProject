@@ -97,6 +97,26 @@ mat-dialog-content {
       .mat-mdc-form-field-error-wrapper {
         padding: 4px 16px 0;
       }
+      
+      .mat-mdc-select {
+        .mat-mdc-select-value {
+          color: #333 !important;
+        }
+        
+        .mat-mdc-select-placeholder {
+          color: #999 !important;
+        }
+        
+        .mat-mdc-select-value-text {
+          color: #333 !important;
+        }
+        
+        .mat-mdc-select-trigger {
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+      }
     }
   }
 }

@@ -7,6 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Task } from '../../../../core/models/task.model';
 import { TasksService } from '../../../../core/services/tasks';
 import { TaskDialogComponent } from '../task-dialog/task-dialog';
+import { TaskCommentsDialogComponent } from '../task-comments-dialog/task-comments-dialog';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog';
 
 
@@ -29,20 +30,10 @@ export class TaskCardComponent {
   task = input.required<Task>();
   taskDeleted = output<number>();
 
-  formatDate(date: Date | string): string {
+  formatDate(date: Date | string | undefined): string {
     if (!date) return '';
     const d = new Date(date);
-    const today = new Date();
-    const yesterday = new Date(today);
-    yesterday.setDate(yesterday.getDate() - 1);
-    
-    if (d.toDateString() === today.toDateString()) {
-      return 'Today';
-    } else if (d.toDateString() === yesterday.toDateString()) {
-      return 'Yesterday';
-    } else {
-      return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
-    }
+    return d.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
   }
 
   getPriorityColor(priority: string): string {
@@ -84,6 +75,19 @@ openTaskDetails(): void {
     }
   });
 }
+
+  openComments(event: Event): void {
+    event.stopPropagation();
+    
+    this.dialog.open(TaskCommentsDialogComponent, {
+      width: '500px',
+      maxWidth: '90vw',
+      data: { 
+        taskId: this.task().id,
+        taskTitle: this.task().title
+      }
+    });
+  }
 
   editTask(event: Event): void {
     event.stopPropagation();

@@ -53,12 +53,19 @@
 
       <!-- Logout Button at Bottom -->
       <div class="logout-section">
-        <button class="logout-btn" (click)="logout()" [title]="'Logout'">
+        <button class="logout-btn" (click)="logout()" [title]="'Logout'" [class.confirm-mode]="logoutConfirmVisible()">
           <mat-icon>logout</mat-icon>
           @if (!sidebarCollapsed()) {
-            <span>Logout</span>
+            @if (logoutConfirmVisible()) {
+              <span class="logout-confirm-text">Logout?</span>
+            } @else {
+              <span>Logout</span>
+            }
           }
         </button>
+        @if (logoutConfirmVisible() && sidebarCollapsed()) {
+          <div class="logout-confirm-tooltip">Logout?</div>
+        }
       </div>
     </div>
   </aside>

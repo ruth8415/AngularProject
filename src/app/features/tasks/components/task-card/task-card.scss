@@ -7,6 +7,8 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   transition: all 0.2s ease;
+  direction: ltr;
+  text-align: left;
   
   &:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -110,6 +112,29 @@
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+}
+
+.status-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  white-space: nowrap;
+  
+  &.status-todo {
+    background: rgba(158, 158, 158, 0.1);
+    color: #757575;
+  }
+  
+  &.status-in_progress {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-turquoise);
+  }
+  
+  &.status-done {
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+  }
 }
 
 .priority-badge {

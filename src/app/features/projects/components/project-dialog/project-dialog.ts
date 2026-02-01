@@ -5,6 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProjectsService } from '../../../../core/services/projects';
 import { TeamsService } from '../../../../core/services/teams';
@@ -23,7 +25,9 @@ interface DialogData {
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   templateUrl: './project-dialog.html',
   styleUrl: './project-dialog.scss'
@@ -41,7 +45,8 @@ export class ProjectDialogComponent {
   projectForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
     teamId: [null as number | null, [Validators.required]],
-    description: ['']
+    description: [''],
+    dueDate: ['', Validators.required]
   });
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {
@@ -76,7 +81,8 @@ export class ProjectDialogComponent {
       const projectData = {
         name: formValue.name!,
         teamId: formValue.teamId!,
-        description: formValue.description || ''
+        description: formValue.description || '',
+        dueDate: formValue.dueDate!
       };
       
       this.projectsService.createProject(projectData).subscribe({
@@ -85,7 +91,7 @@ export class ProjectDialogComponent {
         },
         error: (error) => {
           this.loading.set(false);
-          this.snackBar.open('שגיאה ביצירת הפרויקט: ' + (error.error?.message || 'שגיאה לא ידועה'), 'סגור', { 
+          this.snackBar.open('Error creating project: ' + (error.error?.message || 'Unknown error'), 'Close', { 
             duration: 5000 
           });
         }

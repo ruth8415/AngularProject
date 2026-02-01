@@ -2,10 +2,13 @@
   <div class="task-header">
     <div class="task-title">{{ task().title }}</div>
     <div class="task-actions" (click)="$event.stopPropagation()">
-      <button mat-icon-button (click)="editTask($event)">
+      <button mat-icon-button (click)="openComments($event)" matTooltip="Comments">
+        <mat-icon>chat</mat-icon>
+      </button>
+      <button mat-icon-button (click)="editTask($event)" matTooltip="Edit">
         <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button (click)="deleteTask($event)" color="warn">
+      <button mat-icon-button (click)="deleteTask($event)" color="warn" matTooltip="Delete">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
@@ -24,15 +27,18 @@
         {{ task().teamName }}
       </span>
     }
-    @if (task().createdAt) {
+    @if (task().dueDate) {
       <span class="meta-item">
-        <mat-icon>schedule</mat-icon>
-        {{ formatDate(task().createdAt) }}
+        <mat-icon>event</mat-icon>
+        {{ formatDate(task().dueDate) }}
       </span>
     }
   </div>
   
   <div class="task-badges">
+    <span class="status-badge" [class]="'status-' + task().status">
+      {{ getStatusLabel(task().status) }}
+    </span>
     <span class="priority-badge" [class]="'priority-' + task().priority">
       {{ getPriorityLabel(task().priority) }}
     </span>

@@ -70,6 +70,8 @@
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 2px solid transparent;
+  direction: ltr;
+  text-align: left;
   
   &:hover {
     transform: translateY(-8px) scale(1.02);
@@ -85,7 +87,7 @@
     .header-content {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: space-between;
       width: 100%;
       gap: 12px;
     }

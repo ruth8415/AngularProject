@@ -23,13 +23,13 @@ let teams = [
 ];
 
 let projects = [
-  { id: 1, team_id: 1, name: 'פרויקט ראשון', description: 'תיאור הפרויקט', created_at: new Date() }
+  { id: 1, team_id: 1, name: 'פרויקט ראשון', description: 'תיאור הפרויקט', due_date: new Date('2026-02-15'), created_at: new Date() }
 ];
 
 let tasks = [
-  { id: 1, project_id: 1, title: 'משימה 1', description: 'תיאור', status: 'todo', priority: 'high', created_at: new Date() },
-  { id: 2, project_id: 1, title: 'משימה 2', description: 'תיאור', status: 'in_progress', priority: 'medium', created_at: new Date() },
-  { id: 3, project_id: 1, title: 'משימה 3', description: 'תיאור', status: 'done', priority: 'low', created_at: new Date() }
+  { id: 1, project_id: 1, title: 'משימה 1', description: 'תיאור', status: 'todo', priority: 'high', due_date: new Date('2026-02-10'), created_at: new Date() },
+  { id: 2, project_id: 1, title: 'משימה 2', description: 'תיאור', status: 'in_progress', priority: 'medium', due_date: new Date('2026-02-12'), created_at: new Date() },
+  { id: 3, project_id: 1, title: 'משימה 3', description: 'תיאור', status: 'done', priority: 'low', due_date: new Date('2026-02-08'), created_at: new Date() }
 ];
 
 let teamMembers = [
@@ -38,7 +38,7 @@ let teamMembers = [
   { team_id: 2, user_id: 3 }
 ];
 
-let comments = [];
+let comments = []; // Comments will be created with userName from authenticated user
 
 // Auth middleware
 const authenticateToken = (req, res, next) => {
@@ -218,13 +218,14 @@ app.get('/api/projects', authenticateToken, (req, res) => {
 });
 
 app.post('/api/projects', authenticateToken, (req, res) => {
-  const { name, description, teamId } = req.body;
+  const { name, description, teamId, dueDate } = req.body;
   
   const newProject = {
     id: projects.length + 1,
     team_id: teamId,
     name,
     description,
+    due_date: dueDate ? new Date(dueDate) : undefined,
     created_at: new Date()
   };
   
@@ -251,7 +252,7 @@ app.get('/api/tasks', authenticateToken, (req, res) => {
 });
 
 app.post('/api/tasks', authenticateToken, (req, res) => {
-  const { title, description, status, priority, projectId } = req.body;
+  const { title, description, status, priority, projectId, dueDate } = req.body;
   
   const newTask = {
     id: tasks.length + 1,
@@ -260,6 +261,7 @@ app.post('/api/tasks', authenticateToken, (req, res) => {
     description,
     status: status || 'todo',
     priority: priority || 'medium',
+    due_date: dueDate ? new Date(dueDate) : undefined,
     created_at: new Date()
   };
   
@@ -267,7 +269,7 @@ app.post('/api/tasks', authenticateToken, (req, res) => {
   res.status(201).json(newTask);
 });
 
-app.put('/api/tasks/:id', authenticateToken, (req, res) => {
+app.patch('/api/tasks/:id', authenticateToken, (req, res) => {
   const taskId = parseInt(req.params.id);
   const task = tasks.find(t => t.id === taskId);
   
@@ -294,22 +296,42 @@ app.get('/api/comments', authenticateToken, (req, res) => {
     filteredComments = comments.filter(c => c.task_id === parseInt(taskId));
   }
   
-  res.json(filteredComments);
+  // Add user names to comments
+  const commentsWithUserNames = filteredComments.map(comment => {
+    const user = users.find(u => u.id === comment.user_id);
+    return {
+      id: comment.id,
+      task_id: comment.task_id,
+      user_id: comment.user_id,
+      userName: user ? user.name : 'User',
+      body: comment.body,
+      created_at: comment.created_at
+    };
+  });
+  
+  res.json(commentsWithUserNames);
 });
 
 app.post('/api/comments', authenticateToken, (req, res) => {
-  const { content, taskId } = req.body;
+  const { body, taskId } = req.body;
+  
+  const user = users.find(u => u.id === req.user.id);
   
   const newComment = {
     id: comments.length + 1,
     task_id: taskId,
     user_id: req.user.id,
-    content,
+    body,
     created_at: new Date()
   };
   
   comments.push(newComment);
-  res.status(201).json(newComment);
+  
+  // Return comment with user name
+  res.status(201).json({
+    ...newComment,
+    userName: user ? user.name : 'User'
+  });
 });
 
 app.delete('/api/comments/:id', authenticateToken, (req, res) => {

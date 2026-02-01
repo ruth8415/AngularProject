@@ -29,7 +29,7 @@ export class TeamsService {
     return this.http.get<any[]>(this.apiUrl).pipe(
       map(teams => teams.map(t => this.normalizeTeam(t))),
       tap(teams => {
-        this.teams.set(teams);
+        this.teams.set([...teams]);
         this.loading.set(false);
       }),
       catchError(error => {

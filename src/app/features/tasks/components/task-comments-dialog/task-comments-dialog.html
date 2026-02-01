@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>
+  <mat-icon>chat</mat-icon>
+  Comments - {{ data.taskTitle }}
+</h2>
+
+<mat-dialog-content>
+  <div class="comments-container">
+    @if (loading()) {
+      <div class="loading-state">
+        <p>Loading comments...</p>
+      </div>
+    } @else {
+      @if (comments().length > 0) {
+        <mat-list class="comments-list">
+          @for (comment of comments(); track comment.id) {
+            <mat-list-item>
+              <div class="comment-item">
+                <div class="comment-header">
+                  <span class="comment-author">
+                    <mat-icon>person</mat-icon>
+                    {{ comment.userName }}
+                  </span>
+                  <span class="comment-date">
+                    {{ comment.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+                  </span>
+                </div>
+                <div class="comment-content" style="white-space: pre-wrap;">
+                  {{ comment.body }}
+                </div>
+              </div>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+          }
+        </mat-list>
+      } @else {
+        <div class="no-comments">
+          <mat-icon>chat_bubble_outline</mat-icon>
+          <p>No comments yet</p>
+        </div>
+      }
+    }
+  </div>
+
+  <form [formGroup]="commentForm" (ngSubmit)="onSubmit()" class="comment-form">
+    <mat-form-field appearance="outline" class="full-width">
+      <textarea 
+        matInput 
+        formControlName="body" 
+        rows="1"
+        placeholder="כתוב תגובה..."></textarea>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button 
+        mat-raised-button
+        color="primary" 
+        type="submit" 
+        [disabled]="submitting() || commentForm.invalid"
+        matTooltip="Send">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
+  </form>
+</mat-dialog-content>

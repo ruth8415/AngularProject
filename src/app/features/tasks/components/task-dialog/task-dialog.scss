@@ -145,6 +145,16 @@ mat-dialog-content {
       .mat-mdc-select-placeholder {
         color: #999 !important;
       }
+      
+      .mat-mdc-select-value-text {
+        color: #333 !important;
+      }
+      
+      .mat-mdc-select-trigger {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
     }
   }
 }

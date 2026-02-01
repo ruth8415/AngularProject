@@ -32,6 +32,8 @@ export interface ConfirmDialogData {
   styles: [`
     .confirm-dialog {
       background: white;
+      direction: ltr;
+      text-align: left;
       
       h2 {
         color: #333 !important;
@@ -40,6 +42,7 @@ export interface ConfirmDialogData {
         font-size: 22px !important;
         font-weight: 700 !important;
         border-bottom: 1px solid #f0f0f0;
+        text-align: left;
       }
 
       mat-dialog-content {
@@ -51,6 +54,7 @@ export interface ConfirmDialogData {
           font-size: 16px;
           color: #666;
           line-height: 1.6;
+          text-align: left;
         }
       }
 

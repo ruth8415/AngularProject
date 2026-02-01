@@ -99,6 +99,8 @@
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 2px solid transparent;
+  direction: ltr;
+  text-align: left;
   
   &:hover {
     transform: translateY(-4px);
@@ -116,6 +118,7 @@
       font-weight: 700;
       color: white;
       margin-bottom: 8px;
+      text-align: left;
     }
     
     mat-card-subtitle {
@@ -125,6 +128,7 @@
       display: flex;
       align-items: center;
       gap: 6px;
+      text-align: left;
       
       mat-icon {
         font-size: 16px;
@@ -142,6 +146,31 @@
       color: #666;
       font-size: 15px;
       line-height: 1.6;
+      text-align: left;
+    }
+    
+    .project-due-date {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 6px 10px;
+      background: rgba(0, 212, 255, 0.08);
+      border-radius: 6px;
+      width: fit-content;
+      
+      mat-icon {
+        font-size: 16px;
+        width: 16px;
+        height: 16px;
+        color: var(--accent-turquoise);
+      }
+      
+      span {
+        font-size: 13px;
+        font-weight: 500;
+        color: #555;
+      }
     }
   }
   

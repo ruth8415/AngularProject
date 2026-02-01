@@ -49,6 +49,16 @@ body {
   text-align: right !important;
 }
 
+.mat-mdc-select {
+  .mat-mdc-select-value {
+    color: #333 !important;
+  }
+  
+  .mat-mdc-select-value-text {
+    color: #333 !important;
+  }
+}
+
 .mat-mdc-select-panel {
   direction: rtl;
 }

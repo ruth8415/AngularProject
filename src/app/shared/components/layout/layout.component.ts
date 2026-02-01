@@ -17,6 +17,7 @@ export class LayoutComponent {
 
   currentUser = this.authService.currentUser;
   sidebarCollapsed = signal(false);
+  logoutConfirmVisible = signal(false);
 
   toggleSidebar(): void {
     this.sidebarCollapsed.update(value => !value);
@@ -39,7 +40,14 @@ export class LayoutComponent {
   }
 
   logout(): void {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    if (this.logoutConfirmVisible()) {
+      this.authService.logout();
+      this.router.navigate(['/login']);
+    } else {
+      this.logoutConfirmVisible.set(true);
+      setTimeout(() => {
+        this.logoutConfirmVisible.set(false);
+      }, 3000);
+    }
   }
 }

@@ -21,6 +21,7 @@ export class ProjectsService {
       description: serverProject.description,
       teamId: serverProject.team_id || serverProject.teamId,
       teamName: serverProject.team_name || serverProject.teamName,
+      dueDate: serverProject.due_date || serverProject.dueDate,
       createdAt: serverProject.created_at || serverProject.createdAt
     };
   }

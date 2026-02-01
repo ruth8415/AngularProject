@@ -97,6 +97,13 @@ $glow-turquoise: rgba(0, 212, 255, 0.4);
     z-index: 2;
   }
 
+  // Project cards should be LTR
+  .projects-grid mat-card,
+  .project-card {
+    direction: ltr;
+    text-align: left;
+  }
+
   // Hero Header with Animated Background
   .hero-header {
     position: relative;

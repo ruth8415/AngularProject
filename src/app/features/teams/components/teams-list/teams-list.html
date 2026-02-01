@@ -17,11 +17,11 @@
         <mat-card class="team-card" (click)="viewProjects(team.id)">
           <mat-card-header>
             <div class="header-content">
+              <mat-card-title>{{ team.name }}</mat-card-title>
               <div class="member-badge" (click)="viewTeamMembers(team, $event)">
                 <mat-icon>people</mat-icon>
                 <span>{{ team.memberCount || 0 }}</span>
               </div>
-              <mat-card-title>{{ team.name }}</mat-card-title>
             </div>
           </mat-card-header>
           

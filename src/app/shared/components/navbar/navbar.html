@@ -18,9 +18,13 @@
         <span>{{ currentUser()?.email }}</span>
       </button>
       <mat-divider></mat-divider>
-      <button mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="logout()" [class.confirm-mode]="logoutConfirmVisible()">
         <mat-icon>logout</mat-icon>
-        <span>Logout</span>
+        @if (logoutConfirmVisible()) {
+          <span class="logout-confirm-text">Logout?</span>
+        } @else {
+          <span>Logout</span>
+        }
       </button>
     </mat-menu>
   </mat-toolbar>

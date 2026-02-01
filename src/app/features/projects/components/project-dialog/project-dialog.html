@@ -30,6 +30,16 @@
       <textarea matInput formControlName="description" rows="3" 
                 placeholder="Describe the project's purpose..."></textarea>
     </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Due Date</mat-label>
+      <input matInput [matDatepicker]="projectPicker" type="date" formControlName="dueDate" required>
+      <mat-datepicker-toggle matIconSuffix [for]="projectPicker"></mat-datepicker-toggle>
+      <mat-datepicker #projectPicker></mat-datepicker>
+      @if (projectForm.controls.dueDate?.hasError('required')) {
+        <mat-error>Due date is required</mat-error>
+      }
+    </mat-form-field>
   </form>
 </mat-dialog-content>
 

@@ -1,4 +1,4 @@
-import { Component, inject, computed } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,8 +27,16 @@ export class NavbarComponent {
 
   currentUser = this.authService.currentUser;
   isAuthenticated = this.authService.isAuthenticated;
+  logoutConfirmVisible = signal(false);
 
   logout(): void {
-    this.authService.logout();
+    if (this.logoutConfirmVisible()) {
+      this.authService.logout();
+    } else {
+      this.logoutConfirmVisible.set(true);
+      setTimeout(() => {
+        this.logoutConfirmVisible.set(false);
+      }, 3000);
+    }
   }
 }

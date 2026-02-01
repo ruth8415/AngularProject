@@ -36,6 +36,12 @@
           
           <mat-card-content>
             <p>{{ project.description || 'No description' }}</p>
+            @if (project.dueDate) {
+              <div class="project-due-date">
+                <mat-icon>event</mat-icon>
+                <span>{{ formatDate(project.dueDate) }}</span>
+              </div>
+            }
           </mat-card-content>
           
           <mat-card-actions align="end">
